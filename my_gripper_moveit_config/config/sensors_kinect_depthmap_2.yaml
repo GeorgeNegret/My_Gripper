@@ -1,0 +1,13 @@
+sensors:
+  - default_sensor
+default_sensor:
+  sensor_plugin: occupancy_map_monitor/DepthImageOctomapUpdater
+  image_topic: /camera/depth/image_rect_raw
+  max_update_rate: 1.0
+  far_clipping_plane_distance: 5.0
+  near_clipping_plane_distance: 0.3
+  padding_offset: 0.03
+  padding_scale: 4.0
+  queue_size: 5
+  shadow_threshold: 0.2
+  filtered_cloud_topic: filtered_cloud

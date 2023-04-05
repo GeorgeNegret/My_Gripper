@@ -1,0 +1,9 @@
+<library path="wifi_gripper_driver">
+    <class name="wifi_gripper_driver/WifiGripperHardwareInterface" 
+           type="wifi_gripper_driver::WifiGripperHardwareInterface" 
+           base_class_type="hardware_interface::ActuatorInterface">
+        <description>
+            ROS2 controller for the wifi gripper.
+        </description>
+    </class>
+</library>

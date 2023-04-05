@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="gripper" params="prefix use_fake_hardware fake_sensor_commands parent *origin">
+        
+        <xacro:include filename="$(find my_gripper_description)/urdf/wifi_gripper.ros2_control.xacro" />
+        <xacro:wifi_gripper_ros2_control prefix="${prefix}" use_fake_hardware="${use_fake_hardware}" fake_sensor_commands="${fake_sensor_commands}" /> 
+
+        <joint name="${prefix}_gripper_joint" type="fixed">
+            <xacro:insert_block name="origin" />
+            <parent link="${parent}"/>
+            <child link="${prefix}_gripper_base_link"/>
+        </joint>
+
+        <link name="${prefix}_gripper_base_link">
+            <visual>
+                <origin xyz="0 0 0.046" rpy="0 0 0" />
+                <geometry>
+                    <!-- <box size="0.15 0.09 0.055"/> -->
+                     <mesh filename="package://my_gripper_description/meshes/body.dae" scale="1 1 1"/> 
+                </geometry>
+                <material name="grey">
+                <color rgba="0.5 0.5 0.5 1"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0.046" rpy="0 0 0" />
+                <geometry>
+                    <!-- <box size="0.15 0.09 0.055"/> -->
+                    <mesh filename="package://my_gripper_description/meshes/body.stl" scale="1 1 1"/> 
+                </geometry>
+            </collision>
+        </link>
+
+
+        <!-- GRIPPER LEFT -->
+        <link name="${prefix}_gripper_left">
+            <visual>
+                <origin xyz="0 0.01 0" rpy="0 0 0" />
+                <material name="grey" />
+                <geometry>
+			<mesh filename="package://my_gripper_description/meshes/finger_50.dae" scale="1 1 1"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0.01 0" rpy="0 0 0" />
+                <geometry>
+			<mesh filename="package://my_gripper_description/meshes/finger_50.stl" scale="1 1 1"/> 
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}_finger_left_joint" type="prismatic">
+            <origin xyz="0 -0.055 0.085" rpy="1.57 0 3.14" />     
+            <parent link="${prefix}_gripper_base_link"/>
+            <child link="${prefix}_gripper_left" />
+            <axis xyz="0 0 1"/>
+            <limit effort="100" lower="0.0" upper="0.035" velocity="0.2"/>
+        </joint>
+
+        <!-- GRIPPER RIGHT -->
+        <link name="${prefix}_gripper_right">
+            <visual>
+                <origin xyz="0 0.01 0" rpy="0 0 0" />
+                <material name="grey" />
+                <geometry>
+			 <mesh filename="package://my_gripper_description/meshes/finger_50.dae" scale="1 1 1"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0.01 0" rpy="0 0 0" />
+                <geometry>
+                    	<mesh filename="package://my_gripper_description/meshes/finger_50.stl" scale="1 1 1"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}_finger_right_joint" type="prismatic">
+            <origin xyz="0 0.055 0.085" rpy="1.57 0 0" />
+            <parent link="${prefix}_gripper_base_link"/>
+            <child link="${prefix}_gripper_right" />
+            <axis xyz="0 0 1"/>
+            <limit effort="100" lower="0.0" upper="0.035" velocity="0.2"/>
+            <mimic joint="${prefix}_finger_left_joint" />
+        </joint>
+
+    </xacro:macro>
+</robot>

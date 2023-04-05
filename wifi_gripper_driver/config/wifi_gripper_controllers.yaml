@@ -1,0 +1,19 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 5  # Hz
+    
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    wifi_gripper_controller:
+      type: position_controllers/GripperActionController
+
+wifi_gripper_controller:
+  ros__parameters:
+    joint: _finger_left_joint
+    command_interfaces: position
+    state_interfaces: 
+      - position
+      - velocity
+
+

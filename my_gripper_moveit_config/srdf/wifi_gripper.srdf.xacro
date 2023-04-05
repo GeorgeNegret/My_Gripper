@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="wifi_gripper">
+
+  <!-- parameters -->
+  <xacro:arg name="prefix" default="" />
+
+  <xacro:include filename="$(find my_gripper_moveit_config)/srdf/wifi_gripper_macro.srdf.xacro" />
+  <xacro:wifi_gripper_srdf prefix="$(arg prefix)" />
+ 
+
+    
+</robot>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wifi_gripper">
+
+    <xacro:arg name="description_package" default="my_gripper_description" />
+    <xacro:arg name="use_fake_hardware" default="false" />
+    <xacro:arg name="fake_sensor_commands" default="false" />
+
+    <xacro:property name="description_package" value="$(arg description_package)"/>
+
+    <xacro:include filename="$(find ${description_package})/urdf/wifi_gripper.urdf.xacro"/>
+
+    <!-- Used for fixing robot -->
+    <link name="world"/>
+
+    <!-- World to table -->
+    <xacro:gripper prefix="" use_fake_hardware="$(arg use_fake_hardware)" fake_sensor_commands="$(arg fake_sensor_commands)" parent="world"  >
+        <origin xyz="0 0 1" rpy="0 0 0" />
+    </xacro:gripper>
+
+</robot>

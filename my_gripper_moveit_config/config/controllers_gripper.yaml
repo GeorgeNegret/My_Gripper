@@ -1,0 +1,13 @@
+controller_names:
+  - wifi_gripper_controller
+
+    
+wifi_gripper_controller:
+  action_ns: gripper_cmd
+  type: GripperCommand
+  default: true
+  joints:
+    - _finger_left_joint
+    
+
+

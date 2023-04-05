@@ -1,0 +1,46 @@
+name: humble
+
+on:
+  push:
+    branches: [ "humble" ]
+  pull_request:
+    branches: [ "humble" ]
+
+jobs:
+  deploy_documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Doxygen Documentation
+        uses: mattnotmitt/doxygen-action@v1.9
+        with:
+            doxyfile-path: 'doxyfile.config'
+
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          keep_files: false
+          
+  ci_build:
+    name: Colcon Build
+    needs: deploy_documentation
+    runs-on: ubuntu-latest
+    env:
+      BUILD_DIR: colcon_ws
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: ${{ github.workspace }}/${{ env.BUILD_DIR }}/src
+      - name: My Action
+        id: ros2
+        uses: prachandabhanu/ros2-github-action@main
+        with:
+          image:  prachandabhanu/build_env:ros2-humble-kuka
+          options: -v ${{ github.workspace }}/${{ env.BUILD_DIR }}/src:/${{ env.BUILD_DIR }}/src
+          run: |
+            cd /${{ env.BUILD_DIR }}
+            source /opt/ros/humble/setup.bash
+            colcon build --symlink-install
