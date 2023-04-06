@@ -1,4 +1,4 @@
-![alt text](https://github.com/GeorgeNegret/My_Gripper/blob/main/wifi_gripper.jpg?raw=true)
+![alt text](https://github.com/GeorgeNegret/My_Gripper/blob/main/wifi_gripper.jpg)
 
 
 3d printed wifi gripper 
