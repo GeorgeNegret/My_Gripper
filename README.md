@@ -1,5 +1,6 @@
 ![alt text](https://github.com/GeorgeNegret/My_Gripper/blob/main/wifi_gripper.jpg)
 
+video : https://youtu.be/hiWplxpf6ak
 
 3d printed wifi gripper 
 
