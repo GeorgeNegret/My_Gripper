@@ -1,4 +1,4 @@
-2f parallel wifi gripper 
+![Alt text](relative%20path/to/wifi_gripper.jpg?raw=true "wifi gripper")
 
 3d printed :
     the cad files are the result of my adaptation of the https://github.com/wq13552463699/3D_Printed_2_Fingers_Gripper project 
