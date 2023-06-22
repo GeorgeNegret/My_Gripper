@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <micro_ros_platformio.h>
-
+#include <WiFi.h>
 #include <stdio.h>
 #include <Servo.h>
 
@@ -63,7 +63,7 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time) {
     RCSOFTCHECK(rmw_uros_sync_session(1000));
 
     RCSOFTCHECK(rcl_publish(&servo_pose_publisher, &servo_pose_msg, NULL));
-    RCSOFTCHECK(rcl_publish(&gripper_joint_state_pub, &gripper_state_msg, NULL));
+    // RCSOFTCHECK(rcl_publish(&gripper_joint_state_pub, &gripper_state_msg, NULL));
 
 }
 
@@ -142,14 +142,11 @@ void setup() {
   gripper_servo.write(pose_open);
 
   set_microros_wifi_transports(ssid, password, agent_ip , agent_port);
-  // set_microros_transports();
   // set_microros_serial_transports(Serial);
   
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH);
-  //Serial.println("ESP32 ip Address: ");
-  //Serial.println(WiFi.localIP());
-  //delay(2000);
+  Serial.println("ESP32 ip Address: ");
+  Serial.println(WiFi.localIP());
+  delay(2000);
 
 
   // Managementul memoriei pentru micro-ROS
@@ -199,5 +196,5 @@ void loop() {
   //delay(100);
   RCSOFTCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
   move_fingers();
-  fill_gripper_state_msg(&gripper_state_msg);
+  // fill_gripper_state_msg(&gripper_state_msg);
 }
