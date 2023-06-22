@@ -11,7 +11,6 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
-find_package(serial REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
@@ -20,7 +19,6 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   pluginlib
   rclcpp
   rclcpp_lifecycle
-  serial
   moveit_ros_planning_interface
 )
 
