@@ -196,5 +196,5 @@ void loop() {
   //delay(100);
   RCSOFTCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
   move_fingers();
-  // fill_gripper_state_msg(&gripper_state_msg);
+  fill_gripper_state_msg(&gripper_state_msg);
 }
