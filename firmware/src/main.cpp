@@ -177,7 +177,7 @@ void setup() {
     ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, JointState), "joint_states"));
 
   // create timer
-  RCCHECK(rclc_timer_init_default(&timer, &support, RCL_MS_TO_NS(200), timer_callback));
+  RCCHECK(rclc_timer_init_default(&timer, &support, RCL_MS_TO_NS(10), timer_callback));
 
 
   // create executor : Manages the execution of subscriptions and timer callbacks.
@@ -194,7 +194,7 @@ void setup() {
 
 void loop() {
   //delay(100);
-  RCSOFTCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100)));
+  RCSOFTCHECK(rclc_executor_spin_some(&executor, RCL_MS_TO_NS(10)));
   move_fingers();
   fill_gripper_state_msg(&gripper_state_msg);
 }
